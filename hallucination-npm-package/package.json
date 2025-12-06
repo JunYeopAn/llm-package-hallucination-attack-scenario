@@ -1,5 +1,5 @@
 {
-    "name": "rdd-demo",
+    "name": "package-name",
     "version": "1.0.0",
     "scripts": {
         "install": "node install.js"
