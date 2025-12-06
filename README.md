@@ -88,15 +88,18 @@ Victim Server에서 install script (npm)
 1.	로컬 도커 환경에서 테스트 (docker-server)
 
 (1) 도커 네트워크 생성
+
 	docker network create env-net
 
 (2) 공격자 서버 실행
+
 	cd docker-server/attacker
 	docker build -t attack-server
 	docker run -d –name attack-con –network env-net -p 8000:8000 attack-server
 	docker logs -f attack-con   (로그 모니터링)
 
 (3) 피해자 서버 실행
+
 	cd docker-server/victim
 	docker build -t victim-server
 
@@ -110,14 +113,17 @@ Victim Server에서 install script (npm)
 		victim-server
 
 (4) 피해자 컨테이너 내부에서 악성 패키지 설치
+
 	npm install /path/to/malicious-package.tgz
 
 (5) 공격자 서버 로그에서 환경변수 유출 확인
+
 	docker logs -f attack-con
 
 2.	실제 서버 환경에서 테스트 (real-server)
 
 (1) 공격자 서버(AWS EC2)에 real-server/attacker 배포
+
 	scp -r real-server/attacker ec2-user@AWS_PUBLIC_IP:/home/ec2-user/
 	ssh ec2-user@AWS_PUBLIC_IP
 	cd attacker
@@ -127,6 +133,7 @@ Victim Server에서 install script (npm)
 	- npm install 시 외부 AWS 공격자 서버로 payload가 전송됨.
 
 (3) 악성 npm 패키지 설치
+
 	npm install 
 
 (4) 환경변수 탈취 결과는 AWS 공격자 서버 로그에서 확인
