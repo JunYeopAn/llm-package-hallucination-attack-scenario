@@ -88,59 +88,59 @@ Victim Server에서 install script (npm)
 1.	로컬 도커 환경에서 테스트 (docker-server)
 
 (1) 도커 네트워크 생성
-
-docker network create env-net
+	docker network create env-net
 
 (2) 공격자 서버 실행
-cd docker-server/attacker
-docker build -t attack-server .
-docker run -d –name attack-con –network env-net -p 8000:8000 attack-server
-docker logs -f attack-con   (로그 모니터링)
+	cd docker-server/attacker
+	docker build -t attack-server
+	docker run -d –name attack-con –network env-net -p 8000:8000 attack-server
+	docker logs -f attack-con   (로그 모니터링)
 
 (3) 피해자 서버 실행
-cd docker-server/victim
-docker build -t victim-server .
+	cd docker-server/victim
+	docker build -t victim-server
 
-docker run -d 
-–name victim-con 
-–network env-net 
--p 5001:5000 
--e DB_PASSWORD=‘dummy-pass’ 
--e API_KEY=‘dummy-key’ 
--e JWT_SECRET=‘dummy-jwt’ 
-victim-server
+	docker run -d 
+		–name victim-con 
+		–network env-net 
+		-p 5001:5000 
+		-e DB_PASSWORD=‘dummy-pass’ 
+		-e API_KEY=‘dummy-key’ 
+		-e JWT_SECRET=‘dummy-jwt’ 
+		victim-server
 
 (4) 피해자 컨테이너 내부에서 악성 패키지 설치
-npm install /path/to/malicious-package.tgz
+	npm install /path/to/malicious-package.tgz
 
 (5) 공격자 서버 로그에서 환경변수 유출 확인
-docker logs -f attack-con
-	2.	실제 서버 환경에서 테스트 (real-server)
+	docker logs -f attack-con
+
+2.	실제 서버 환경에서 테스트 (real-server)
 
 (1) 공격자 서버(AWS EC2)에 real-server/attacker 배포
-scp -r real-server/attacker ec2-user@AWS_PUBLIC_IP:/home/ec2-user/
-ssh ec2-user@AWS_PUBLIC_IP
-cd attacker
-python3 server.py
+	scp -r real-server/attacker ec2-user@AWS_PUBLIC_IP:/home/ec2-user/
+	ssh ec2-user@AWS_PUBLIC_IP
+	cd attacker
+	python3 server.py
 
 (2) 피해자 서버는 아무 서버여도 무관
-npm install 시 외부 AWS 공격자 서버로 payload가 전송됨.
+	- npm install 시 외부 AWS 공격자 서버로 payload가 전송됨.
 
 (3) 악성 npm 패키지 설치
-npm install 
+	npm install 
 
 (4) 환경변수 탈취 결과는 AWS 공격자 서버 로그에서 확인
-	3.	실제 NPM 패키지 설치 테스트 (hallucination-npm-package)
-
+	
+3.	실제 NPM 패키지 설치 테스트 (hallucination-npm-package)
 (1) 환각 패키지명을 실제 npm에 publish한 상태
 (2) payload.txt는 Github raw URL을 통해 install.js에서 자동으로 불러옴
 (3) npm install  실행
 (4) 공격자 서버 쪽에서 env 탈취 결과 확인 가능
 
 주의: private Github repo일 경우 install 단계에서 payload 다운로드가 불가능함. 테스트 시 public으로 변경 필요.
-	4.	최종 요약
 
-	•	docker-server/: 로컬 도커 테스트용 attacker + victim 환경
-	•	real-server/: 실제 인터넷 환경 공격 시연용(AWS attacker 포함)
-	•	hallucination-npm-package/: LLM 환각 패키지를 실제 npm에 등록한 악성 패키지 코드
-	•	payload.txt는 Github raw URL을 불러오며, repo가 private이면 작동하지 않음 → public 필요
+4.	최종 요약
+	- docker-server/: 로컬 도커 테스트용 attacker + victim 환경
+	- real-server/: 실제 인터넷 환경 공격 시연용(AWS attacker 포함)
+	- hallucination-npm-package/: LLM 환각 패키지를 실제 npm에 등록한 악성 패키지 코드
+	- payload.txt는 Github raw URL을 불러오며, repo가 private이면 작동하지 않음 → public 필요
