@@ -54,8 +54,6 @@ Victim Server에서 install script (npm)
    - Express + sqlite 기반의 간단한 웹 서비스.
    - DB_PASSWORD, API_KEY 등 환경변수를 가진 상태에서 악성 NPM 패키지를 설치하면 환경변수 탈취가 발생하는 구조.
 
-즉, docker-server/는 로컬 테스트 환경에서 공격 성공 여부를 재현하기 위한 구조이다.
-
 2.	real-server/ — 실제 공격/피해자 서버 환경 구성
 이 디렉터리는 로컬이 아닌 실제 서버 환경 공격을 재현하기 위한 코드가 들어 있다.
 
@@ -68,9 +66,6 @@ Victim Server에서 install script (npm)
 	- AWS EC2 상에서 실행하는 공격자 서버 코드이다.
 	- 이 디렉터리의 파일이 그대로 AWS에서 동작하며, 실제 외부에서 탈취 요청이 들어오면 로그를 실시간으로 확인할 수 있다.
 
-즉, real-server/는 인터넷 기반 환경에서 “악성 npm 설치 
-→ AWS 공격자 서버로 env 유출” 흐름을 시연하기 위한 디렉터리이다.
-
 3.	hallucination-npm-package/ — LLM 환각 패키지를 실제로 NPM에 등록한 악성 패키지 코드
 이 디렉터리에는 다음 내용이 포함된다.
 	- 여러 LLM에서 가장 자주 환각된 패키지명을 수집하고 실제 npm에 등록함
@@ -80,8 +75,6 @@ Victim Server에서 install script (npm)
 	- payload.txt는 실제 payload가 들어 있는 GitHub raw URL을 가리키며, 설치 시 해당 파일을 자동으로 불러와 실행됨
 
 주의: payload.txt가 위치한 Github 저장소는 private이기 때문에, 실제 NPM 설치 시 실행되지 않는다. 테스트를 원할 경우 Github 저장소를 public으로 변경하면 정상 작동한다.
-
-즉, hallucination-npm-package/는 “LLM이 만들어낸 가짜 패키지를 실제 공급망 공격(Supply Chain Attack)으로 악용할 수 있다”는 것을 보여주는 악성 패키지 PoC 구조이다.
 
 ⸻
 
