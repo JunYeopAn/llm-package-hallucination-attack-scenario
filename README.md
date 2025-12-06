@@ -57,23 +57,26 @@ Victim Server에서 install script (npm)
 즉, docker-server/는 로컬 테스트 환경에서 공격 성공 여부를 재현하기 위한 구조이다.
 
 2.	real-server/ — 실제 공격/피해자 서버 환경 구성
-	- 이 디렉터리는 로컬이 아닌 실제 서버 환경 공격을 재현하기 위한 코드가 들어 있다.
+이 디렉터리는 로컬이 아닌 실제 서버 환경 공격을 재현하기 위한 코드가 들어 있다.
 
-	•	real-server/victim/
-피해자 서버는 아무 서버여도 무관하며, 기존 victim 코드 구조와 동일하게 동작한다.
-	•	real-server/attacker/
-AWS EC2 상에서 실행하는 공격자 서버 코드이다.
-이 디렉터리의 파일이 그대로 AWS에서 동작하며, 실제 외부에서 탈취 요청이 들어오면 로그를 실시간으로 확인할 수 있다.
+	real-server/victim/
+
+	- 피해자 서버는 아무 서버여도 무관하며, 기존 victim 코드 구조와 동일하게 동작한다.
+
+	real-server/attacker/
+	
+	- AWS EC2 상에서 실행하는 공격자 서버 코드이다.
+	- 이 디렉터리의 파일이 그대로 AWS에서 동작하며, 실제 외부에서 탈취 요청이 들어오면 로그를 실시간으로 확인할 수 있다.
 
 즉, real-server/는 인터넷 기반 환경에서 “악성 npm 설치 → AWS 공격자 서버로 env 유출” 흐름을 시연하기 위한 디렉터리이다.
-	3.	hallucination-npm-package/ — LLM 환각 패키지를 실제로 NPM에 등록한 악성 패키지 코드
-이 디렉터리에는 다음 내용이 포함된다.
 
-	•	여러 LLM에서 가장 자주 환각된 패키지명을 수집하고 실제 npm에 등록함
-	•	등록한 패키지에 악성 install 스크립트와 payload 로직 구현
-	•	package.json에는 “install: node install.js”가 포함
-	•	install.js는 외부 URL에서 payload를 다운로드 후 실행
-	•	payload.txt는 실제 payload가 들어 있는 GitHub raw URL을 가리키며, 설치 시 해당 파일을 자동으로 불러와 실행됨
+3.	hallucination-npm-package/ — LLM 환각 패키지를 실제로 NPM에 등록한 악성 패키지 코드
+이 디렉터리에는 다음 내용이 포함된다.
+	- 여러 LLM에서 가장 자주 환각된 패키지명을 수집하고 실제 npm에 등록함
+	- 등록한 패키지에 악성 install 스크립트와 payload 로직 구현
+	- package.json에는 “install: node install.js”가 포함
+	- install.js는 외부 URL에서 payload를 다운로드 후 실행
+	- payload.txt는 실제 payload가 들어 있는 GitHub raw URL을 가리키며, 설치 시 해당 파일을 자동으로 불러와 실행됨
 
 주의: payload.txt가 위치한 Github 저장소는 private이기 때문에, 실제 NPM 설치 시 실행되지 않는다. 테스트를 원할 경우 Github 저장소를 public으로 변경하면 정상 작동한다.
 
@@ -82,9 +85,10 @@ AWS EC2 상에서 실행하는 공격자 서버 코드이다.
 ⸻
 
 작동 방법
-	1.	로컬 도커 환경에서 테스트 (docker-server)
+1.	로컬 도커 환경에서 테스트 (docker-server)
 
 (1) 도커 네트워크 생성
+
 docker network create env-net
 
 (2) 공격자 서버 실행
