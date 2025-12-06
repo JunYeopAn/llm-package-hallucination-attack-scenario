@@ -38,23 +38,26 @@ Victim Server에서 install script (npm)
 
 ## 프로젝트 구조 설명
 
-이 레포지토리는 LLM 환각 패키지를 이용한 환경변수 탈취 실험 전체를 재현할 수 있도록 세 개의 주요 폴더로 구성되어 있다. 각 폴더는 로컬 도커 환경, 실제 서버 환경, 악성 NPM 패키지를 담당한다.
+이 레포지토리는 LLM 환각 패키지를 이용한 환경변수 탈취 실험 전체를 재현할 수 있도록 세 개의 주요 폴더로 구성되어 있다. 
+각 폴더는 로컬 도커 환경, 실제 서버 환경, 악성 NPM 패키지를 담당한다.
 
 1.	docker-server/ — 로컬 테스트용 도커 환경
-   - 이 디렉터리에는 attacker와 victim 두 개의 서버가 포함되어 있으며, 로컬 도커 환경에서 PoC 전체 흐름이 작동하는지 테스트하기 위한 코드가 들어 있다.
+이 디렉터리에는 attacker와 victim 두 개의 서버가 포함되어 있으며, 로컬 도커 환경에서 PoC 전체 흐름이 작동하는지 테스트하기 위한 코드가 들어 있다.
 
 	docker-server/attacker/
 
    - Python 기반 간단한 HTTP 서버.
    - 피해자 서버로부터 환경변수 exfiltration payload를 수신하는 역할.
 	
-   •	docker-server/victim/
+	docker-server/victim/
+ 
    - Express + sqlite 기반의 간단한 웹 서비스.
    - DB_PASSWORD, API_KEY 등 환경변수를 가진 상태에서 악성 NPM 패키지를 설치하면 환경변수 탈취가 발생하는 구조.
 
 즉, docker-server/는 로컬 테스트 환경에서 공격 성공 여부를 재현하기 위한 구조이다.
-	2.	real-server/ — 실제 공격/피해자 서버 환경 구성
-이 디렉터리는 로컬이 아닌 실제 서버 환경 공격을 재현하기 위한 코드가 들어 있다.
+
+2.	real-server/ — 실제 공격/피해자 서버 환경 구성
+	- 이 디렉터리는 로컬이 아닌 실제 서버 환경 공격을 재현하기 위한 코드가 들어 있다.
 
 	•	real-server/victim/
 피해자 서버는 아무 서버여도 무관하며, 기존 victim 코드 구조와 동일하게 동작한다.
