@@ -68,7 +68,8 @@ Victim Server에서 install script (npm)
 	- AWS EC2 상에서 실행하는 공격자 서버 코드이다.
 	- 이 디렉터리의 파일이 그대로 AWS에서 동작하며, 실제 외부에서 탈취 요청이 들어오면 로그를 실시간으로 확인할 수 있다.
 
-즉, real-server/는 인터넷 기반 환경에서 “악성 npm 설치 → AWS 공격자 서버로 env 유출” 흐름을 시연하기 위한 디렉터리이다.
+즉, real-server/는 인터넷 기반 환경에서 “악성 npm 설치 
+→ AWS 공격자 서버로 env 유출” 흐름을 시연하기 위한 디렉터리이다.
 
 3.	hallucination-npm-package/ — LLM 환각 패키지를 실제로 NPM에 등록한 악성 패키지 코드
 이 디렉터리에는 다음 내용이 포함된다.
@@ -130,6 +131,7 @@ Victim Server에서 install script (npm)
 	python3 server.py
 
 (2) 피해자 서버는 아무 서버여도 무관
+
 	- npm install 시 외부 AWS 공격자 서버로 payload가 전송됨.
 
 (3) 악성 npm 패키지 설치
