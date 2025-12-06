@@ -146,3 +146,5 @@ Victim Server에서 install script (npm)
 	- real-server/: 실제 인터넷 환경 공격 시연용(AWS attacker 포함)
 	- hallucination-npm-package/: LLM 환각 패키지를 실제 npm에 등록한 악성 패키지 코드
 	- payload.txt는 Github raw URL을 불러오며, repo가 private이면 작동하지 않음 → public 필요
+	- 추가로 : 우리 테스트 환각 패키지는 다음 외부 깃허브를 참조
+	- https://github.com/JunYeopAn/rdd-remote-payload-test.git
