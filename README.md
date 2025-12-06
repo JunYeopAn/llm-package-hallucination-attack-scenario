@@ -43,7 +43,7 @@ Victim Server에서 install script (npm)
 1.	docker-server/ — 로컬 테스트용 도커 환경
    - 이 디렉터리에는 attacker와 victim 두 개의 서버가 포함되어 있으며, 로컬 도커 환경에서 PoC 전체 흐름이 작동하는지 테스트하기 위한 코드가 들어 있다.
 
-docker-server/attacker/
+	docker-server/attacker/
    - Python 기반 간단한 HTTP 서버.
    - 피해자 서버로부터 환경변수 exfiltration payload를 수신하는 역할.
 	
