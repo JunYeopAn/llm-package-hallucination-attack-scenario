@@ -161,6 +161,7 @@ Victim Server에서 install script (npm)
 
 다음 깃허브 레포지스트리는 env(환경변수) 노출 payload
 	- https://github.com/JunYeopAn/rdd-remote-payload-test
+	
 다음 깃허브 레포지스트리는 리버스쉘 payload
 	- https://github.com/JunYeopAn/rdd-remote-payload-test2
 
