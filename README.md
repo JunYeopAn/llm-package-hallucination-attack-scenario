@@ -37,7 +37,6 @@ Victim Server에서 install script (npm)
 ## NPM 패키지 
 
 실제로 우리는 llm 환각증세로 나온 패키지명 중 estree-util, metro-evaluator로 NPM 패키지를 등록하였다.
-
 	- "estree-util" npm 패키지 주소(환경변수 노출 실습) : https://www.npmjs.com/package/estree-util 
 	
 	- "metro-evaluator" npm 패키지 주소(리버스쉘 실습) : https://www.npmjs.com/package/metro-evaluator
