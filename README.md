@@ -124,12 +124,10 @@ Victim Server에서 install script (npm)
 
 2.	실제 서버 환경에서 테스트 (real-server)
 
-(1) 공격자 서버(AWS EC2)에 real-server/attacker 배포
+(1) 공격자 서버(AWS EC2)에서 로그 확인
 
-	scp -r real-server/attacker ec2-user@AWS_PUBLIC_IP:/home/ec2-user/
-	ssh ec2-user@AWS_PUBLIC_IP
-	cd attacker
-	python3 server.py
+	node app.js // 환경변수 노출 로그 확인 (설치 전 실행)
+	nc -lvnp 8000 // 리버스쉘 탈취 확인 (설치 후 실행)
 
 (2) 피해자 서버는 아무 서버여도 무관
 
