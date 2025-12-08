@@ -34,6 +34,14 @@ Victim Server에서 install script (npm)
    - install.js (remote payload download & eval)
    - payload (exfiltrate process.env)
 
+## NPM 패키지 
+
+실제로 우리는 llm 환각증세로 나온 패키지명 중 estree-util, metro-evaluator로 NPM 패키지를 등록하였다.
+	- estree-util npm 패키지 주소 : https://www.npmjs.com/package/estree-util 
+		- 환경변수 노출 패키지
+	- metro-evaluator npm 패키지 주소 : https://www.npmjs.com/package/metro-evaluator
+		- 리버스쉘 패키지
+
 ---
 
 ## 프로젝트 구조 설명
@@ -151,8 +159,10 @@ Victim Server에서 install script (npm)
 
 ## 추가정보
 	- 다음 깃허브 레포지스트리는 env(환경변수) 노출 payload
-	- https://github.com/JunYeopAn/rdd-remote-payload-test.git
+	- https://github.com/JunYeopAn/rdd-remote-payload-test
 	- 다음 깃허브 레포지스트리는 리버스쉘 payload
-	- 주소
+	- https://github.com/JunYeopAn/rdd-remote-payload-test2
+
+
 
 	
