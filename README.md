@@ -162,6 +162,6 @@ Victim Server에서 install script (npm)
 	
 리버스쉘 공격 payload GitHub 주소 : https://github.com/JunYeopAn/rdd-remote-payload-test2
 
-
+llm 환각 총 정리 팀플 GitHub 주소 : https://github.com/llm-package-hallucination-detection/llm-package-hallucination-detection
 
 	
